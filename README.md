@@ -20,12 +20,12 @@ To address the common issues of mislocalized scattering centers, distorted speck
 
 ## 📊 Supported Datasets
 
-PIP-LDM has been extensively evaluated and generalizes well across diverse scenes and spatial resolutions (from 1m to 10m)[cite: 14]. Supported datasets include:
+PIP-LDM has been extensively evaluated and generalizes well across diverse scenes and spatial resolutions (from 1m to 10m). Supported datasets include:
 
-* **SEN12:** 10m resolution, Sentinel-1 / Sentinel-2 pairs[cite: 248, 252].
-* **WHU-OPT-SAR:** 5m resolution, Gaofen-3 / Gaofen-1 pairs[cite: 249, 252].
-* **QXS-SAROPT:** 1m resolution, Gaofen-3 / Google Earth pairs[cite: 248, 252].
-* **OSDataset:** 1m resolution, Sentinel-1 / Google Earth pairs[cite: 249, 252].
+* **SEN12:** 10m resolution, Sentinel-1 / Sentinel-2 pairs.
+* **WHU-OPT-SAR:** 5m resolution, Gaofen-3 / Gaofen-1 pairs.
+* **QXS-SAROPT:** 1m resolution, Gaofen-3 / Google Earth pairs.
+* **OSDataset:** 1m resolution, Sentinel-1 / Google Earth pairs.
 
 ## 🛠️ Installation
 
@@ -54,21 +54,6 @@ dataset_name/
 ├── val/
 ├── test/
 └── train_captions.json  # Containing scene semantics and imaging conditions
-```
-
-## 💻 Usage
-
-### Training
-To train the PIP-LDM model from scratch on your dataset (e.g., O2S translation), run the following command:
-
-```bash
-accelerate launch train.py \
-  --pretrained_model_name_or_path "runwayml/stable-diffusion-v1-5" \
-  --train_json_path "./dataset/train_captions.json" \
-  --val_json_path "./dataset/val_captions.json" \
-  --output_dir "./outputs" \
-  --train_batch_size 16 \
-  --learning_rate 1e-5
 ```
 
 ## 📖 Citation
