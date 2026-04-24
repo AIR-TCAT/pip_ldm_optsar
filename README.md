@@ -31,7 +31,7 @@ PIP-LDM has been extensively evaluated and generalizes well across diverse scene
 
 **1. Clone the repository:**
 ```bash
-git clone https://github.com/TCAT-tfj/pip_ldm_optsar.git
+git clone https://github.com/AIR-TCAT/pip_ldm_optsar.git
 cd PIP-LDM
 ```
 
