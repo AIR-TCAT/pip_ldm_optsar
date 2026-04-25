@@ -4,7 +4,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Framework: PyTorch](https://img.shields.io/badge/Framework-PyTorch-orange.svg)](https://pytorch.org/)
 
-Optical-SAR cross-modal generation, particularly optical-to-SAR (O2S) translation, is a fundamental problem in remote sensing that requires bridging two intrinsically different imaging modalities. However, most existing approaches reduce this problem to statistical style transfer and ignore the imaging physics that govern SAR backscatter. As a result, scattering centers are often mislocalized, speckle statistics deviate from real SAR distributions, and latent-space compression erases the sparse structural patterns intrinsic to SAR data. To address these issues, we propose a physics-aware parametric latent diffusion model (PIP-LDM) for high-fidelity cross-modal generation. We design physical feature injection (PFI) to incorporate imaging parameters and scene semantics through a dual-stream encoder. We further construct a multi-level physical consistency constraint (MPC) that regularizes the generation process at three levels, covering macro-scale geometric structure, dominant scattering centers, and micro-scale speckle statistics. In addition, we propose a latent regularization loss module (LRLM) that alleviates SAR feature degradation in latent space by preserving sparsity and connectivity of sparse scattering structures. Across four benchmark datasets spanning spatial resolutions from 1\,m to 10\,m, PIP-LDM improves cross-modal generation in both directions over the previous state of the art. It reduces FID by 4.63\% on average for O2S and 7.44\% for S2O, with dataset-specific reductions reaching up to 42.14\% on WHU-OPT-SAR in the S2O setting. It also improves physical consistency, producing more accurate scattering-center localization, more faithful speckle statistics, and more realistic geometric edges.
+Optical-SAR cross-modal generation, particularly optical-to-SAR (O2S) translation, is a fundamental problem in remote sensing that requires bridging two intrinsically different imaging modalities. However, most existing approaches reduce this problem to statistical style transfer and ignore the imaging physics that govern SAR backscatter. As a result, scattering centers are often mislocalized, speckle statistics deviate from real SAR distributions, and latent-space compression erases the sparse structural patterns intrinsic to SAR data. To address these issues, we propose a physics-aware latent diffusion model (PA-LDM) for high-fidelity cross-modal generation. We design physical feature injection (PFI) to incorporate imaging parameters and scene semantics through a dual-stream encoder. We further construct a multi-level physical consistency constraint (MPC) that regularizes the generation process at three levels, covering macro-scale geometric structure, dominant scattering centers, and micro-scale speckle statistics. In addition, we propose a latent regularization loss module (LRLM) that alleviates SAR feature degradation in latent space by preserving sparsity and connectivity of sparse scattering structures. Across four benchmark datasets spanning spatial resolutions from 1\,m to 10\,m, PA-LDM improves cross-modal generation in both directions over the previous state of the art. It reduces FID by 4.40\% on average for O2S and 13.13\% for SAR-to-optical (S2O), with dataset-specific reductions reaching up to 42.14\% on WHU-OPT-SAR in the S2O setting. It also improves physical consistency, producing more accurate scattering-center localization, more faithful speckle statistics, and more realistic geometric edges.
 ![Framework Diagram](images/frame.png)
 
 ## 🌟 Key Innovations
@@ -17,15 +17,6 @@ To address the common issues of mislocalized scattering centers, distorted speck
     * *Feature-scale:* Dominant scattering center preservation via a statistically thresholded mask.
     * *Micro-scale:* Speckle statistics consistency by matching latent feature moments (mean and variance).
 * **Latent Regularization Loss Module (LRLM):** Mitigates the low-pass filtering effect of standard VAEs by applying an $L_1$-norm sparsity penalty and Gram matrix-based connectivity regularization to preserve SAR-specific sparse structures in the latent space.
-
-## 📊 Supported Datasets
-
-PIP-LDM has been extensively evaluated and generalizes well across diverse scenes and spatial resolutions (from 1m to 10m). Supported datasets include:
-
-* **SEN12:** 10m resolution, Sentinel-1 / Sentinel-2 pairs.
-* **WHU-OPT-SAR:** 5m resolution, Gaofen-3 / Gaofen-1 pairs.
-* **QXS-SAROPT:** 1m resolution, Gaofen-3 / Google Earth pairs.
-* **OSDataset:** 1m resolution, Sentinel-1 / Google Earth pairs.
 
 ## 🛠️ Installation
 
@@ -55,6 +46,14 @@ dataset_name/
 ├── test/
 └── train_captions.json  # Containing scene semantics and imaging conditions
 ```
+## 📊 Supported Datasets
+
+PIP-LDM has been extensively evaluated and generalizes well across diverse scenes and spatial resolutions (from 1m to 10m). Supported datasets include:
+
+* **SEN12:** 10m resolution, Sentinel-1 / Sentinel-2 pairs.
+* **WHU-OPT-SAR:** 5m resolution, Gaofen-3 / Gaofen-1 pairs.
+* **QXS-SAROPT:** 1m resolution, Gaofen-3 / Google Earth pairs.
+* **OSDataset:** 1m resolution, Sentinel-1 / Google Earth pairs.
 
 ## 📖 Citation
 

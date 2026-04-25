@@ -126,7 +126,7 @@ def log_validation(vae, text_encoder, tokenizer, unet, controlnet_wrapper, val_d
 
 
 def main(args):
-    swanlab_tracker = SwanLabTracker("OSD_Semantic_Depth_ControlNet", experiment_name="osd_Opt2SAR_Full_Innovation")
+    swanlab_tracker = SwanLabTracker("Your project name.", experiment_name="Your experiment name.")
     accelerator = Accelerator(
         gradient_accumulation_steps=args.gradient_accumulation_steps,
         mixed_precision=args.mixed_precision,
@@ -158,10 +158,8 @@ def main(args):
     sar_physics_loss = SARPhysicsLatentLoss(device=accelerator.device)
 
     if args.use_semantic_lora:
-        print("Adding Semantic LoRA to UNet...")
         unet = setup_semantic_lora_for_unet(unet)
 
-    print("Loading Depth Estimation Model...")
     depth_image_processor = DPTImageProcessor.from_pretrained(args.depth_model_path)
     depth_estimator = DPTForDepthEstimation.from_pretrained(args.depth_model_path)
     depth_estimator = depth_estimator.to(accelerator.device)
@@ -209,7 +207,7 @@ def main(args):
     vae.to(accelerator.device)
 
     if accelerator.is_main_process:
-        accelerator.init_trackers("osd_controlnet_semantic", config=dict(vars(args)))
+        accelerator.init_trackers("Your project name.", config=dict(vars(args)))
 
     global_step = 0
     progress_bar = tqdm(range(args.max_train_steps), disable=not accelerator.is_local_main_process)
@@ -343,8 +341,6 @@ def main(args):
                 unwrapped_net.controlnet.save_pretrained(os.path.join(save_path, "controlnet_base"))
                 if args.use_semantic_lora:
                     accelerator.unwrap_model(unet).save_pretrained(os.path.join(save_path, "unet_lora"))
-
-    print("Training finished.")
     accelerator.end_training()
 
 

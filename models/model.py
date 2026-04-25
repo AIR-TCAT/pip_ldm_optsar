@@ -62,11 +62,11 @@ class SemanticEnhancedTextEncoder:
         self.device = device
         print(f"Initializing SemanticEnhancedTextEncoder on {self.device}...")
         self.clip_tokenizer = CLIPTokenizer.from_pretrained("Your path of the model weight of clip-vit-base-patch32.")
-        self.clip_text_encoder = CLIPTextModelWithProjection.from_pretrained("Your path of the model weight of clip-vit-base-patch32").to(device)
+        self.clip_text_encoder = CLIPTextModelWithProjection.from_pretrained("Your path of the model weight of clip-vit-base-patch32.").to(device)
         self.clip_text_encoder.eval()
 
-        self.bert_tokenizer = AutoTokenizer.from_pretrained("Your path of the model weight of bert-base-uncased")
-        self.bert_model = AutoModel.from_pretrained("Your path of the model weight of bert-base-uncased").to(device)
+        self.bert_tokenizer = AutoTokenizer.from_pretrained("Your path of the model weight of bert-base-uncased.")
+        self.bert_model = AutoModel.from_pretrained("Your path of the model weight of bert-base-uncased.").to(device)
         self.bert_model.eval()
 
     def encode_text_with_semantic_hierarchy(self, text_description):
